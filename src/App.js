@@ -10,7 +10,7 @@ class TestTodo extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.remove = this.remove.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
     }
 
     handleChange(event) {
@@ -27,13 +27,13 @@ class TestTodo extends Component {
         });
     }
 
-    remove(event) {
-        const { items } = this.state // берем текущий массив (items: []), и  value - значение инпута
-        let rmItems = items.slice(-1); // удаляем элемент
+    handleRemove(event) {
+        const { items } = this.state // берем текущий массив (items: [])
+        items.splice(-1); // удаляем элемент
         this.setState({
-            items: rmItems, // обновляем state массива
+            items: items, // обновляем state массива
         });
-        console.log(rmItems)
+    
     }
 
 
@@ -56,7 +56,7 @@ class TestTodo extends Component {
                         onChange={this.handleChange} />
                     <button type='submit'>Отправить</button>
                 </form>
-                <button type='button' onClick={this.remove}>Удалить</button>
+                <button type='button' onClick={this.handleRemove}>Удалить</button>
                 <ul>
                     {items_list}
                 </ul>
