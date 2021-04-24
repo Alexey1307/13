@@ -10,7 +10,7 @@ class TestTodo extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.remove = this.remove.bind(this);
+        this.remove = this.remove.bind(this);
     }
 
     handleChange(event) {
@@ -27,7 +27,14 @@ class TestTodo extends Component {
         });
     }
 
-      
+    remove(event) {
+        const { items } = this.state // берем текущий массив (items: []), и  value - значение инпута
+        let rmItems = items.slice(-1); // удаляем элемент
+        this.setState({
+            items: rmItems, // обновляем state массива
+        });
+        console.log(rmItems)
+    }
 
 
     render() {
@@ -40,14 +47,6 @@ class TestTodo extends Component {
         //Создаем из этого списка компоненты
         const items_list = items_list_filtered.map(( item, index ) => <li key={index}>{item}</li>);
 
-        //ЧТО НЕ ТАК???????????
-        function remove(event) {
-            return items_list.splice(-1);
-        }
-     
-        
-
-
         return (
             <div>
                 <header>Todo list</header>
@@ -56,9 +55,8 @@ class TestTodo extends Component {
                     <input type='text' value={this.state.value}
                         onChange={this.handleChange} />
                     <button type='submit'>Отправить</button>
-                    
                 </form>
-                <button type='submit' onClick={this.remove}>Удалить</button>
+                <button type='button' onClick={this.remove}>Удалить</button>
                 <ul>
                     {items_list}
                 </ul>
