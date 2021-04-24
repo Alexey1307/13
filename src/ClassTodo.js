@@ -34,20 +34,26 @@ class TestTodo extends Component {
     render() {
 
         const { items } = this.state // Получаем список значений
-        let items_list
 
-        //Создаем из этого списка компоненты
-        // Краткий вариант:
-        items_list = items.map((item, index) =>
-            <li key={index}>{item}</li>)
-
+        // let items_list;
         //Подробный вариант (код идентичен краткому варианту):
         // items_list = []
         // items.forEach(function (item, index) {
-        //     items_list.push(
-        //         <li key={index}>{item}</li>
-        //     )
+        //     let regexp = /\d/g;
+        //     if (regexp.match(String(items_list))) {
+        //         items_list.push(
+        //             <li key={index}>{item}</li>
+        //         )
+        //     }
+        //
         // })
+
+
+        //Выбираем из списка только те в которых нет чисел
+        const items_list_filtered = items.filter(el => !/\d/g.test(el))
+
+        //Создаем из этого списка компоненты
+        const items_list = items_list_filtered.map((item, index) => <li key={index}>{item}</li>)
 
         return (
             <div>

@@ -5,17 +5,13 @@ class TestTodo extends Component {
         super(props);
         this.state = {
             value: '',
-            items: [] // добавляем в стейт пустой массив данных
+            items: []
         };
 
-        // Синтаксис bind: let boundFunc = func.bind(context), context = this.
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.remove = this.remove.bind(this);
     }
-
-    //Свойство event.target содержит элемент, на котором сработало событие.
-    //Тоесть тут -> {event.target.value} сказано:
-    //Событие-event(.точка)элемент на котором произошло событие-target(.точка)значение элемента-value.
 
     handleChange(event) {
         this.setState({ value: event.target.value });
@@ -31,29 +27,26 @@ class TestTodo extends Component {
         });
     }
 
+      
+
+
     render() {
-
-        const {items} = this.state // Получаем список значений
-
-        // let items_list;
-        //Подробный вариант (код идентичен краткому варианту):
-        // items_list = []
-        // items.forEach(function (item, index) {
-        //     let regexp = /\d/g;
-        //     if (regexp.match(String(items_list))) {
-        //         items_list.push(
-        //             <li key={index}>{item}</li>
-        //         )
-        //     }
-        //
-        // })
-
+        
+        const { items } = this.state // Получаем список значений
 
         //Выбираем из списка только те в которых нет чисел
         const items_list_filtered = items.filter(el => !/\d/g.test(el))
 
         //Создаем из этого списка компоненты
-        const items_list = items_list_filtered.map(( item, index ) => <li key={index}>{item}</li>)
+        const items_list = items_list_filtered.map(( item, index ) => <li key={index}>{item}</li>);
+
+        //ЧТО НЕ ТАК???????????
+        function remove(event) {
+            return items_list.splice(-1);
+        }
+     
+        
+
 
         return (
             <div>
@@ -63,7 +56,9 @@ class TestTodo extends Component {
                     <input type='text' value={this.state.value}
                         onChange={this.handleChange} />
                     <button type='submit'>Отправить</button>
+                    
                 </form>
+                <button type='submit' onClick={this.remove}>Удалить</button>
                 <ul>
                     {items_list}
                 </ul>
