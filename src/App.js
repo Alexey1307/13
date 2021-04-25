@@ -61,8 +61,7 @@ class TestTodo extends Component {
                 <li key={index}>{item}
                 <button type='submit'>Выполнено</button>
                 </li>
-            
-        </form>
+            </form>
         );
 
         return (
