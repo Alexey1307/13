@@ -11,6 +11,7 @@ class TestTodo extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleStrikeOut = this.handleStrikeOut.bind(this);
     }
 
     handleChange(event) {
@@ -36,6 +37,15 @@ class TestTodo extends Component {
     
     }
 
+    handleStrikeOut(event) {
+        event.preventDefault();
+        const element = event.target;
+        element.classList.toggle("crossed-line");
+    }
+
+   
+    
+
 
     render() {
         
@@ -45,7 +55,15 @@ class TestTodo extends Component {
         const items_list_filtered = items.filter(el => !/\d/g.test(el))
 
         //Создаем из этого списка компоненты
-        const items_list = items_list_filtered.map(( item, index ) => <li key={index}>{item}</li>);
+        const items_list = items_list_filtered.map((item, index) =>
+            <form onSubmit={this.handleStrikeOut}>
+            {/* <li key={index}>{item}</li> */}
+                <li key={index}>{item}
+                <button type='submit'>Выполнено</button>
+                </li>
+            
+        </form>
+        );
 
         return (
             <div>

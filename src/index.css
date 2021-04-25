@@ -28,3 +28,7 @@ header{
   font-size: 18px;
   justify-content: space-between;
 }
+
+.crossed-line {
+    text-decoration: line-through;
+}
